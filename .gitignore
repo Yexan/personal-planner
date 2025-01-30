@@ -1,5 +1,10 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
+# Env files
+/src/app/config/environment.ts
+/src/app/auth/auth.whitelist.ts
+
+
 # Compiled output
 /dist
 /tmp
@@ -40,3 +45,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
