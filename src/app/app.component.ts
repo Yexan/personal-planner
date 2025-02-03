@@ -23,11 +23,11 @@ import { RoutingService } from './routing/routing.service'
     </main>
   `,
   styles: `
+    @import './config/mixins'
+
     :host
       display: block
-      width: 100%
-      max-width: 940px
-      margin: 0 auto
+      +wrapper(940px)
       background-color: #888
 
     header
