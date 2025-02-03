@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
     return this.authService.user$.pipe(
       map((user) => {
         if (this.authService.isUserAllowed(user)) return true
-        this.routingService.navigateTo('home')
+        this.routingService.navigateTo('login')
         return false
       })
     )
