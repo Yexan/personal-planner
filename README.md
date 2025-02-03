@@ -11,32 +11,18 @@ Have great day!
 
 Before to lauch the project you need:
 
-1️⃣ **`src/app/config/environment.ts`** (Copy `environment.example.ts` Fill with your Firebase infos)
-2️⃣ **`src/app/auth/auth.whitelist.ts`** (Copy `auth.whitelist.example.ts` Add you allowed email addresses)
+- Head to [Firebase console](https://console.firebase.google.com/)
+- Create a project and add:
+  - a Firestore database
+  - Authentication with Google Auth Provider
+- Go to your project configuration
+- create a `.env` file at the root of your project (you have a `.env.example` file in the project) with the information from your project configuration
 
-```sh
-cp src/app/config/environment.example.ts src/app/config/environment.ts
-cp src/app/auth/auth.whitelist.example.ts src/app/auth/auth.whitelist.ts
-```
+Then you're free to go, you can run `npm start`
+
+Side note:
+There is a whitelist of users that are allowed to access the app, make sure to configure it properly otherwise you won't be able to access the app :)
+
+It's currently hosted on Vercel on my side, you can easily add ENV variable corresponding to your .env file and you're good to go ✨
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.4.
-
-## Development server
-
-To start a local development server, run:
-
-```bash
-ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
