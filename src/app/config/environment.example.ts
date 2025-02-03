@@ -1,3 +1,4 @@
+// This is an example of the environment.ts file created by create-env.js script
 export const environment = {
   firebase: {
     apiKey: "YOUR_API_KEY",

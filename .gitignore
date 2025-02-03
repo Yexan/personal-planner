@@ -3,6 +3,7 @@
 # Env files
 /src/app/config/environment.ts
 /src/app/auth/auth.whitelist.ts
+.env
 
 
 # Compiled output

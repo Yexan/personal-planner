@@ -2,11 +2,12 @@
   "name": "yex-planner",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "set-env": "node -r dotenv/config create-env-files.js",
+    "ng": "npm run set-env && ng",
+    "start": "npm run set-env && ng serve",
+    "build": "npm run set-env && ng build",
+    "watch": "npm run set-env && ng build --watch --configuration development",
+    "test": "npm run set-env && ng test"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
     "chart.js": "^4.4.7",
+    "dotenv": "^16.4.7",
     "ng2-charts": "^8.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
