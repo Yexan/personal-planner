@@ -23,20 +23,18 @@ import { RoutingService } from './routing/routing.service'
     </main>
   `,
   styles: `
-    @import './config/mixins'
+    @use './config/mixins'
 
     :host
       display: block
-      +wrapper(940px)
+      +mixins.wrapper(940px)
       background-color: #888
 
     header
-      display: flex
-      justify-content: space-between
-      align-items: center
+      +mixins.flex-row-between
       padding: 10px
-      background: #222
       color: white
+      background: #222
 
     nav a
       margin-right: 10px
@@ -44,10 +42,10 @@ import { RoutingService } from './routing/routing.service'
       text-decoration: none
 
     button
-      background: #f44336
-      color: white
-      border: none
       padding: 5px 10px
+      color: white
+      background: #f44336
+      border: none
       cursor: pointer
 
     main

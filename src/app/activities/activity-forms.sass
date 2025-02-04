@@ -1,0 +1,29 @@
+@use '../config/mixins'
+
+:host
+  +mixins.flex-column-center
+
+h2
+  margin-top: 0
+
+form
+  +mixins.wrapper(500px)
+  gap: 10px
+
+input, select, textarea
+  width: 100%
+  margin: 5px 0
+  padding: 10px
+
+textarea
+  min-height: 100px
+
+button[type="submit"]
+  +mixins.button(#C8E6C9)
+
+.form-actions
+  +mixins.flex-row-right
+  gap: 5px
+
+  *
+    flex: 1

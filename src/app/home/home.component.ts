@@ -29,13 +29,16 @@ import { getMonthName } from '../config/months'
   `,
   imports: [NgFor, TagChartComponent],
   styles: `
-    @import '../config/mixins'
+    @use '../config/mixins'
 
     :host
-      +flex-row-between-stretch
+      +mixins.flex-row-between-stretch
 
-      @media(max-width: 580px)
-        +flex-column-left
+      @media(max-width: 690px)
+        +mixins.flex-column-left
+
+      > *
+        width: 100%
 
     h2
       cursor: pointer

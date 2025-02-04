@@ -41,20 +41,14 @@ import { Tag } from '../tags/tag.type'
         <textarea formControlName="details"></textarea>
       </label>
 
-      <button type="submit" [disabled]="activityForm.invalid">Ajouter</button>
-      <button type="button" (click)="cancel()">Annuler</button>
+      <div class="form-actions">
+        <button type="button" (click)="goBackToActivityMonth()">Annuler</button>
+        <button type="submit" [disabled]="activityForm.invalid">Ajouter</button>
+      </div>
     </form>
   `,
   styles: `
-    form
-      display: flex
-      flex-direction: column
-      gap: 10px
-      max-width: 300px
-
-    input, select, textarea
-      width: 100%
-
+    @use './activity-forms'
   `
 })
 export class ActivityNewComponent {
@@ -75,7 +69,12 @@ export class ActivityNewComponent {
     this.routingService.navigateTo('home')
   }
 
-  cancel() {
-    this.routingService.navigateTo('home')
+  goBackToActivityMonth() {
+    const { year, month } = this.activityForm.value
+    if (!!year?.trim() && !!month?.trim()) {
+      this.routingService.goToMonth(year, month)
+    } else {
+      this.routingService.navigateTo('home')
+    }
   }
 }

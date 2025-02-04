@@ -1,3 +1,5 @@
+@use 'sass:color'
+
 /**
  ** Mixins for positions
  ** --------------------**/
@@ -89,6 +91,15 @@
   &:focus
     background-color: $color-hover
 
+=bg-gradient-and-hover($gradient, $gradient-hover: $gradient)
+  background-image: $gradient
+  background-size: 150%
+  background-position: top left
+
+  &:hover,
+  &:focus
+    background-position: bottom right
+
 =border-and-hover($color, $color-hover: $color, $border-width: 1px)
   border: $border-width solid $color
 
@@ -102,6 +113,22 @@
 
 =tr($prop: 'all', $time: '.3s')
   transition: #{ $prop } #{ $time } ease-in-out
+
+@function darker-color($color, $amount: 15%)
+  @return color.scale($color, $lightness: -$amount)
+
+@function gradient($color1, $direction: 167deg, $color2: null, $color3: null)
+  $color2: if($color2 == null, darker-color($color1, 10%), $color2)
+  $color3: if($color3 == null, darker-color($color2, 35%), $color3)
+  @return linear-gradient($direction, $color1 0%, $color2 35%, $color3 100%)
+
+=button($color: #eee, $text-color: #000)
+  padding: .8em 1em
+  +bg-gradient-and-hover(gradient($color))
+  color: $text-color
+  border: none
+  cursor: pointer
+  +tr
 
 /**
  ** Mixins for flex display
