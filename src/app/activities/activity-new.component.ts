@@ -66,7 +66,7 @@ export class ActivityNewComponent {
 
     const newActivity: ActivityWithoutId = this.activityForm.value as ActivityWithoutId
     await this.activityService.addActivity(newActivity)
-    this.routingService.navigateTo('home')
+    this.goBackToActivityMonth()
   }
 
   goBackToActivityMonth() {
