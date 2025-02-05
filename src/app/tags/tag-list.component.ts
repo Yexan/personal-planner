@@ -9,47 +9,138 @@ import { Tag } from './tag.type'
   standalone: true,
   selector: 'app-tag-list',
   template: `
-    <h2>Gestion des tags</h2>
+    <section class="new-tag">
+      <h2>Ajouter tags</h2>
 
-    <form [formGroup]="tagForm" (ngSubmit)="addTag()">
-      <input formControlName="name" placeholder="Nom du tag" />
-      <button type="submit" [disabled]="tagForm.invalid">Ajouter</button>
-    </form>
-
-    <ul>
-      <li *ngFor="let tag of tags()" class="tag">
-        <span class="tag-name" (click)="editTag(tag)">{{ tag.name }}</span>
-        <span
-          class="color-tile"
-          [style.backgroundColor]="tag.color || 'black'"
-          (click)="editTag(tag)"></span>
-        <button (click)="editTag(tag)">✏️</button>
-        <button (click)="deleteTag(tag.id)">🗑</button>
-      </li>
-    </ul>
-
-    <div *ngIf="selectedTag()">
-      <h3>Modifier le tag</h3>
-      <form [formGroup]="editTagForm" (ngSubmit)="updateTag()">
-        <input formControlName="name" placeholder="Nom" />
-        <input formControlName="color" type="color" />
-        <button type="submit" [disabled]="editTagForm.invalid">Modifier</button>
-        <button type="button" (click)="cancelEdit()">Annuler</button>
+      <form [formGroup]="tagForm" (ngSubmit)="addTag()">
+        <input formControlName="name" placeholder="Nom du tag" />
+        <div class="form-actions">
+          <button type="submit" [disabled]="tagForm.invalid">Ajouter</button>
+        </div>
       </form>
-    </div>
+    </section>
+
+    <section class="list-tag">
+      <h2>Tags existants</h2>
+      <ul class="tags">
+        <li
+          *ngFor="let tag of tags()"
+          class="tag"
+          (click)="editTag(tag)"
+          [style.--tag-color]="tag.color || '#000'"
+          [class.active]="tag.id === selectedTag()?.id">
+          <div class="tag-infos">
+            <span class="color-tile"></span>
+            <span class="tag-name">{{ tag.name }}</span>
+          </div>
+          <div class="form-actions">
+            <button (click)="editTag(tag)">✏️</button>
+            <button (click)="deleteTag(tag.id)" class="delete">🗑</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <section class="edit-tag">
+      <div *ngIf="selectedTag()">
+        <h2>Modifier le tag</h2>
+        <form [formGroup]="editTagForm" (ngSubmit)="updateTag()">
+          <input formControlName="name" placeholder="Nom" />
+          <input formControlName="color" type="color" />
+          <div class="form-actions">
+            <button type="button" (click)="cancelEdit()">Annuler</button>
+            <button type="submit" [disabled]="editTagForm.invalid">Modifier</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
   `,
   imports: [CommonModule, ReactiveFormsModule],
   styles: `
+    @use '../config/mixins'
+
+    .new-tag
+      grid-area: new
+
+    .list-tag
+      grid-area: list
+
+    .edit-tag
+      grid-area: edit
+
+    :host
+      display: grid
+      grid-template-areas: "list new" "list edit" "list ."
+      gap: 30px
+
+      @media(max-width: 570px)
+        grid-template-areas: "new" "list" "edit"
+
+    h2
+      margin-top: 0
+
+    form
+      +mixins.wrapper(500px)
+      gap: 10px
+
+    input
+      width: 100%
+      margin: 5px 0
+      padding: 10px
+
+    button[type="submit"]
+      +mixins.button(#C8E6C9)
+
+    .form-actions
+      +mixins.flex-row-right
+      gap: 5px
+
+      *
+        width: 50%
+
+    .tags
+      +mixins.wrapper(500px)
+      padding: 0
+      list-style: none
+
+
     .tag
-      .tag-name
-        margin-right: 5px
-        font-weight: 700
-      .color-tile
-        display: inline-block
-        width: 20px
-        height: 20px
-        margin-bottom: -5px
-        margin-right: 5px
+      --position: 0%
+      +mixins.flex-row-between
+      margin-bottom: 10px
+      padding: 8px 10px
+      background-color: #eee
+      background-image: linear-gradient(to right, transparent var(--position), var(--tag-color) 85%, var(--tag-color) 100%)
+      cursor: pointer
+      transition: background 0.3s ease-in-out
+
+      &:hover,
+      &.active
+        --position: 35%
+        background-color: #fff
+
+    .tag-infos
+      flex: 1
+
+    .tag-name
+      margin-right: 5px
+      font-weight: 700
+
+    .color-tile
+      display: inline-block
+      width: 20px
+      height: 20px
+      margin-bottom: -5px
+      margin-right: 10px
+      background-color: var(--tag-color)
+
+    .delete
+      +mixins.button(#FFCCBC)
+
+    input[type="color"]
+      padding: 1px
+      border: none
+      margin: 5px 0 10px
   `
 })
 export class TagListComponent {
