@@ -135,7 +135,8 @@ import { Tag } from './tag.type'
       background-color: var(--tag-color)
 
     .delete
-      +mixins.button(#FFCCBC)
+      +mixins.button(#FFCCBC, true)
+      border-radius: 20%
 
     input[type="color"]
       padding: 1px

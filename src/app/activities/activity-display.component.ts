@@ -34,6 +34,7 @@ import { NgIf } from '@angular/common';
       margin: 5px auto 20px
       padding: 15px
       background-color: #ccc
+      +mixins.gradient(#ccc)
 
     .activity-content
       flex: 1
@@ -57,7 +58,8 @@ import { NgIf } from '@angular/common';
         +mixins.flex-column-center
 
     .delete
-      +mixins.button(#FFCCBC)
+      +mixins.button(#FFCCBC, true)
+      border-radius: 20%
   `,
 })
 export class ActivityDisplayComponent {
