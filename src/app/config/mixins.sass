@@ -36,6 +36,14 @@
 =grid-column($column-start, $column-end: $column-start + 1)
   grid-column: #{$column-start} / #{$column-end}
 
+
+=animate-slide-in-wiew($contain1: 0%, $contain2: 10%)
+  @media (prefers-reduced-motion: no-preference)
+    @supports (animation-timeline: view())
+      animation: slide-fade-in both
+      animation-timeline: view()
+      animation-range: contain #{$contain1} contain #{$contain2}
+
 /**
  ** Mixins for sizes
  ** ----------------**/
@@ -447,3 +455,9 @@
     transform: scale3d(0.3, 0.3, 0.3)
   to
     opacity: 0
+
+@keyframes slide-fade-in
+  from
+    opacity: 0
+    box-shadow: none
+    transform: scale(.8) translateY(15vh)

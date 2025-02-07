@@ -37,6 +37,7 @@ import { RoutingService } from './routing/routing.service'
       padding: 10px
       color: white
       background: #222
+      z-index: 10
 
     nav a
       margin-right: 10px
@@ -51,6 +52,7 @@ import { RoutingService } from './routing/routing.service'
       cursor: pointer
 
     main
+      margin-bottom: 40px
       padding: 15px
   `
 })

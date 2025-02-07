@@ -33,19 +33,26 @@ import { getMonthName } from '../config/months'
     :host
       +mixins.flex-column-left
       gap: 30px
+      padding-bottom: 50px
 
       > *
         width: 100%
 
       @media(min-width: 760px)
-        +mixins.flex-row-between-stretch
+        +mixins.flex-row-top
 
         section
           flex: 2
 
         app-tag-chart
           flex: 1
-          align-self: center
+          position: sticky
+          top: calc(50% - 150px)
+
+    button,
+    app-tag-chart
+      +mixins.animate-slide-in-wiew
+
   `
 })
 export class ActivitiesMonthComponent {

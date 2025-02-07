@@ -1,4 +1,4 @@
-import { Component, inject, Signal, WritableSignal, signal } from '@angular/core'
+import { Component, inject, Signal, WritableSignal, signal, ViewChild, ElementRef } from '@angular/core'
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { CommonModule } from '@angular/common'
 
@@ -40,7 +40,7 @@ import { Tag } from './tag.type'
         </li>
       </ul>
     </section>
-    <section class="edit-tag">
+    <section class="edit-tag" #editSection>
       <div *ngIf="selectedTag()">
         <h2>Modifier le tag</h2>
         <form [formGroup]="editTagForm" (ngSubmit)="updateTag()">
@@ -67,6 +67,9 @@ import { Tag } from './tag.type'
 
     .edit-tag
       grid-area: edit
+      height: fit-content
+      padding-bottom: 60px
+      +mixins.animate-slide-in-wiew(-30%)
 
     :host
       display: grid
@@ -110,6 +113,7 @@ import { Tag } from './tag.type'
       background-image: linear-gradient(to right, transparent var(--position), var(--tag-color) 85%, var(--tag-color) 100%)
       cursor: pointer
       transition: background 0.3s ease-in-out
+      +mixins.animate-slide-in-wiew
 
       &:hover,
       &.active
@@ -145,6 +149,8 @@ export class TagListComponent {
   private tagService = inject(TagService)
   private fb = inject(FormBuilder)
 
+  @ViewChild('editSection') editSection!: ElementRef<HTMLElement>
+
   tags: Signal<Tag[]> = this.tagService.tags
 
   tagForm: FormGroup = this.fb.group({
@@ -168,6 +174,10 @@ export class TagListComponent {
   editTag(tag: Tag) {
     this.selectedTag.set(tag)
     this.editTagForm.setValue({ name: tag.name, color: tag.color || '#000000' })
+    this.editSection?.nativeElement?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'end',
+    })
   }
 
   async updateTag() {

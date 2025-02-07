@@ -35,6 +35,7 @@ import { NgIf } from '@angular/common';
       padding: 15px
       background-color: #ccc
       +mixins.gradient(#ccc)
+      +mixins.animate-slide-in-wiew
 
     .activity-content
       flex: 1
