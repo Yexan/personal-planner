@@ -76,9 +76,6 @@ import { Tag } from './tag.type'
       @media(max-width: 570px)
         grid-template-areas: "new" "list" "edit"
 
-    h2
-      margin-top: 0
-
     form
       +mixins.wrapper(500px)
       gap: 10px

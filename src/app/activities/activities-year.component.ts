@@ -41,9 +41,6 @@ import { getMonthName } from '../config/months'
       > *
         width: 100%
 
-    h2:first-of-type
-      margin-top: 0
-
     ul
       padding: 0
       list-style: none

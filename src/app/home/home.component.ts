@@ -43,9 +43,6 @@ import { getMonthName } from '../config/months'
     h2
       cursor: pointer
 
-      &:first-of-type
-        margin-top: 0
-
     ul
       padding: 0
       list-style: none
