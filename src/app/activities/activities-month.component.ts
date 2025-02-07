@@ -13,18 +13,40 @@ import { getMonthName } from '../config/months'
   standalone: true,
   selector: 'app-activities-month',
   template: `
-    <h2>{{ monthName() }} {{ year }}</h2>
-    <ng-container *ngFor="let activity of activities()">
-      <app-activitiy-display [activity]="activity"></app-activitiy-display>
-    </ng-container>
+    <section>
+      <h2>{{ monthName() }} {{ year }}</h2>
+      <ng-container *ngFor="let activity of activities()">
+        <app-activitiy-display [activity]="activity"></app-activitiy-display>
+      </ng-container>
 
-    <button (click)="routingService.goToYear(year)">Retour en {{ year }}</button>
+      <button (click)="routingService.goToYear(year)">Retour en {{ year }}</button>
+    </section>
 
     <app-tag-chart
       [data]="tagsStats()"
       title="Répartition des activités en {{monthName()}} {{ year }}"></app-tag-chart>
   `,
-  imports: [NgFor, ActivityDisplayComponent, TagChartComponent]
+  imports: [NgFor, ActivityDisplayComponent, TagChartComponent],
+  styles: `
+    @use '../config/mixins'
+
+    :host
+      +mixins.flex-column-left
+      gap: 30px
+
+      > *
+        width: 100%
+
+      @media(min-width: 760px)
+        +mixins.flex-row-between-stretch
+
+        section
+          flex: 2
+
+        app-tag-chart
+          flex: 1
+          align-self: center
+  `
 })
 export class ActivitiesMonthComponent {
   private route = inject(ActivatedRoute)
