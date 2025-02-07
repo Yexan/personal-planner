@@ -38,7 +38,11 @@ export class ActivityStore {
       }
       grouped[activity.year][activity.month].push(activity)
     }
-
+    for (const year of Object.keys(grouped)) {
+      for (const month of Object.keys(grouped[year])) {
+        grouped[year][month].sort((a, b) => Number(a.day) - Number(b.day))
+      }
+    }
     return grouped
   })
 
