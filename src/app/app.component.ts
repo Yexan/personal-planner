@@ -31,6 +31,8 @@ import { RoutingService } from './routing/routing.service'
       background-color: #888
 
     header
+      position: sticky
+      top: 0
       +mixins.flex-row-between
       padding: 10px
       color: white
