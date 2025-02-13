@@ -12,11 +12,11 @@ import { RoutingService } from './routing/routing.service'
   template: `
      <header *ngIf="authService.user$ | async as user">
       <nav>
-        <a routerLinkActive="active" routerLink="/home">Accueil</a>
-        <a routerLinkActive="active" routerLink="/activity/new">Nouvelle activité</a>
-        <a routerLinkActive="active" routerLink="/tags">Gérer les tags</a>
+        <a routerLinkActive="active" routerLink="/home"><span class="label">Accueil</span><span class="icon">🏠</span></a>
+        <a routerLinkActive="active" routerLink="/activity/new"><span class="label">Nouvelle activité</span><span class="icon">✍️</span></a>
+        <a routerLinkActive="active" routerLink="/tags"><span class="label">Gérer les tags</span><span class="icon">🏷️</span></a>
       </nav>
-      <button (click)="logout()"><span class="label">Se déconnecter</span><span class="icon">⏻</span></button>
+      <button (click)="logout()"><span class="label">Se déconnecter</span><span class="icon">🔓</span></button>
     </header>
     <main>
       <router-outlet></router-outlet>
@@ -41,6 +41,16 @@ import { RoutingService } from './routing/routing.service'
       background: var(--surface)
       box-shadow: var(--shadow-sm)
       z-index: 10
+
+      .icon
+        display: none
+
+      @media(max-width: 600px)
+        .label
+          display: none
+
+        .icon
+          display: inline-block
 
     nav a
       position: relative
@@ -82,14 +92,6 @@ import { RoutingService } from './routing/routing.service'
 
       &:hover
         opacity: 0.8
-
-      .label
-        margin-right: 5px
-        font-weight: 500
-
-      @media(max-width: 600px)
-        .label
-          display: none
 
     main
       margin-bottom: 40px
