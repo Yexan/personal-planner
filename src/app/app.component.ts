@@ -46,6 +46,7 @@ import { RoutingService } from './routing/routing.service'
       position: relative
       text-decoration: none
       padding: 1rem
+      +typography.serif
       background-blend-mode: luminosity
       +typography.text-gradient
 
@@ -72,6 +73,7 @@ import { RoutingService } from './routing/routing.service'
       padding: 5px 10px
       color: white
       font-weight: 900
+      +typography.serif
       background: var(--error)
       border: none
       border-radius: 4px

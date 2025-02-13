@@ -194,7 +194,15 @@
 =glass-surface
   background-color: rgba(255, 255, 255, 0.2)
   backdrop-filter: blur(25px)
+  transition: background-color 0.3s ease-in-out
 
+=surface-radius($radius: 15px)
+  border-radius: var(--surface-radius, $radius)
+
+=glass-surface-card($padding: 15px, $radius: 15px)
+  padding: $padding
+  +glass-surface
+  +surface-radius($radius)
 
 =button($color: rgba(255, 255, 255, 0.2), $outline: false, $text-color: #000)
   padding: .8em 1em

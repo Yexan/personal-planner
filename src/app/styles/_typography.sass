@@ -1,11 +1,29 @@
 @use './variables' as *
 
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap')
+
+
 $font-primary: 'Outfit', sans-serif
+$font-secondary: 'PT Serif', serif
 $font-heading: $font-primary
 $font-weight-regular: 400
 $font-weight-semibold: 600
 $font-weight-bold: 800
 
+=build-font-family-mixin($font-family, $sizePxValue: null, $weight: null)
+  font-family: $font-family
+
+  @if $sizePxValue != null
+    font-size: calc(#{ $sizePxValue }rem / 16)
+
+  @if $weight != null
+    font-weight: #{$weight}
+
+=outfit($sizePxValue: null, $weight: null)
+  +build-font-family-mixin($font-primary, $sizePxValue, $weight)
+
+=serif($sizePxValue: null, $weight: null)
+  +build-font-family-mixin($font-secondary, $sizePxValue, $weight)
 
 @property --gradient-angle
   syntax: "<angle>"
@@ -49,7 +67,7 @@ $font-weight-bold: 800
   line-height: 1
   +text-gradient
 
-  &::after
+  &:after
     content: ''
     position: absolute
     bottom: -0.5rem

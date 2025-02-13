@@ -16,12 +16,9 @@ Chart.register(...registerables)
     @use '../styles/mixins'
 
     .chart-container
-      width: 100%
-      max-width: 400px
-      margin: auto
-      padding: 10px
-      +mixins.glass-surface
-      border-radius: var(--surface-radius)
+      +mixins.flex-column-center
+      +mixins.wrapper(400px)
+      +mixins.glass-surface-card
   `
 })
 export class TagChartComponent implements OnChanges {

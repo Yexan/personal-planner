@@ -33,9 +33,7 @@ import { NgIf } from '@angular/common';
     .activity
       +mixins.flex-row-between
       margin: 5px auto 20px
-      padding: 15px
-      +mixins.glass-surface
-      border-radius: var(--surface-radius)
+      +mixins.glass-surface-card
       box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.1))
       transition: transform 0.2s, box-shadow 0.2s
       +mixins.animate-slide-in-wiew

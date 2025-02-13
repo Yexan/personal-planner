@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core'
-import { NgFor } from '@angular/common'
 
 import { TagChartComponent } from '../tags/tag-chart.component'
 import { RoutingService } from '../routing/routing.service'
@@ -11,28 +10,32 @@ import { getMonthName } from '../config/months'
   selector: 'app-home',
   template: `
     <section class="years">
-      <div *ngFor="let year of store.years()" class="year">
-        <h2 (click)="routingService.goToYear(year)">Année {{ year }}</h2>
-        <ul>
-          <li
-            *ngFor="let month of store.monthsByYear()[year]"
-            (click)="routingService.goToMonth(year, month)">
-            Mois de {{ getMonthName(month) }} ({{ store.activitiesCountByMonth()[year][month] || 0 }} activités)
-          </li>
-        </ul>
-      </div>
+      @for (year of store.years(); track year) {
+        <article class="year">
+          <h2 (click)="routingService.goToYear(year)">Année {{ year }}</h2>
+          <div class="months">
+            @for (month of store.monthsByYear()[year]; track month) {
+              <div class="month" (click)="routingService.goToMonth(year, month)">
+                <span class="month-name">Mois de {{ getMonthName(month) }}</span>
+                <span class="month-activities">({{ store.activitiesCountByMonth()[year][month] || 0 }} activités)</span>
+              </div>
+            }
+          </div>
+        </article>
+      }
     </section>
 
     <app-tag-chart
       [data]="store.allTagsStats()"
       title="Répartition globale des activités"></app-tag-chart>
   `,
-  imports: [NgFor, TagChartComponent],
+  imports: [TagChartComponent],
   styles: `
     @use '../styles/mixins'
-
+    @use '../styles/typography'
     :host
       +mixins.flex-row-between-stretch
+      gap: 15px
 
       @media(max-width: 690px)
         +mixins.flex-column-left
@@ -40,15 +43,37 @@ import { getMonthName } from '../config/months'
       > *
         width: 100%
 
+    .year
+      margin: 0 0 20px
+      +mixins.glass-surface-card
+
     h2
       cursor: pointer
 
-    ul
-      padding: 0
-      list-style: none
+    .months
+      +mixins.flex-row-left
+      flex-wrap: wrap
+      gap: 15px
+      padding: 1rem
 
-    li
+    .month
+      +mixins.flex-column-center
+      +mixins.glass-surface-card
       cursor: pointer
+      +typography.text-gradient
+
+      &:hover
+        .month-activities
+          color: transparent
+
+    .month-name
+      margin-bottom: 10px
+      +typography.serif(16, 700)
+
+    .month-activities
+      color: #000
+      transition: color 0.3s
+
   `,
 })
 export class HomeComponent {
