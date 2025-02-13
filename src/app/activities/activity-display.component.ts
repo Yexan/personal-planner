@@ -27,40 +27,57 @@ import { NgIf } from '@angular/common';
   `,
   imports: [NgIf],
   styles: `
-    @use '../config/mixins'
+    @use '../styles/mixins'
+    @use '../styles/variables'
 
     .activity
       +mixins.flex-row-between
       margin: 5px auto 20px
       padding: 15px
-      background-color: #ccc
-      +mixins.gradient(#ccc)
+      +mixins.glass-surface
+      border-radius: var(--surface-radius)
+      box-shadow: var(--shadow-sm, 0 2px 4px rgba(0,0,0,0.1))
+      transition: transform 0.2s, box-shadow 0.2s
       +mixins.animate-slide-in-wiew
+
+      &:hover
+        transform: translateY(-2px)
+        box-shadow: var(--shadow-md, 0 4px 8px rgba(0,0,0,0.15))
 
     .activity-content
       flex: 1
       cursor: pointer
+      padding-right: 15px
 
     .activity-name
       font-weight: 700
+      font-size: 1.1rem
+      margin-bottom: 5px
 
     .activity-infos
       font-weight: 300
       font-style: italic
+      color: var(--text-secondary, #666)
 
     .activity-details
       margin-top: 10px
+      line-height: 1.4
 
     .activity-controls
       +mixins.flex-row-center
-      gap: 5px
+      gap: 8px
 
       @media (max-width: 460px)
         +mixins.flex-column-center
 
+      button
+        +mixins.flex-column-center
+        +mixins.w-h(36px)
+        border-radius: 50%
+
+
     .delete
-      +mixins.button(#FFCCBC, true)
-      border-radius: 20%
+      +mixins.button(variables.$delete, true)
   `,
 })
 export class ActivityDisplayComponent {

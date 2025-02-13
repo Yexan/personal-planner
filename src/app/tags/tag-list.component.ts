@@ -57,7 +57,7 @@ import { Tag } from './tag.type'
   `,
   imports: [CommonModule, ReactiveFormsModule],
   styles: `
-    @use '../config/mixins'
+    @use '../styles/mixins'
 
     .new-tag
       grid-area: new

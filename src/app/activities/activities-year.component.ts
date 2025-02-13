@@ -30,7 +30,7 @@ import { getMonthName } from '../config/months'
   `,
   imports: [NgFor, TagChartComponent],
   styles: `
-    @use '../config/mixins'
+    @use '../styles/mixins'
 
     :host
       +mixins.flex-row-between-stretch

@@ -13,10 +13,15 @@ Chart.register(...registerables)
     </div>
   `,
   styles: `
+    @use '../styles/mixins'
+
     .chart-container
       width: 100%
       max-width: 400px
       margin: auto
+      padding: 10px
+      +mixins.glass-surface
+      border-radius: var(--surface-radius)
   `
 })
 export class TagChartComponent implements OnChanges {

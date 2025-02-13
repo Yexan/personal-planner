@@ -28,7 +28,7 @@ import { getMonthName } from '../config/months'
   `,
   imports: [NgFor, ActivityDisplayComponent, TagChartComponent],
   styles: `
-    @use '../config/mixins'
+    @use '../styles/mixins'
 
     :host
       +mixins.flex-column-left
